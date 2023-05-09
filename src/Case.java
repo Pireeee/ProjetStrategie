@@ -7,7 +7,7 @@ public class Case {
     public int y;
     public Ressource ressource;
 
-    public Case(int x, int y, Ressource ressource) {
+    public Case(int x, int y) {
         this.x = x;
         this.y = y;
         Random rand = new Random();
