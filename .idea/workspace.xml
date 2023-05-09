@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce917eb8-83ff-41f7-b6e1-867bffda605b" name="Changes" comment="Init">
+      <change afterPath="$PROJECT_DIR$/src/main/Case.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/unite/UniteAbstract.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Carte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Carte.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Ressource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ressource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TypeRessource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TypeRessource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Carte.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Carte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Case.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ressource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/Ressource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TypeRessource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/TypeRessource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Unite/UniteAbstract.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +20,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -49,7 +53,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1683635157999</updated>
-      <workItem from="1683635159195" duration="1060000" />
+      <workItem from="1683635159195" duration="2365000" />
     </task>
     <task id="LOCAL-00001" summary="Init">
       <created>1683635210459</created>
