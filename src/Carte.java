@@ -19,7 +19,7 @@ public class Carte {
                         case NOURRITURE:
                             System.out.print("N");
                             break;
-                        caseBOIS:
+                        case BOIS:
                             System.out.print("B");
                             break;
                         case OR:
