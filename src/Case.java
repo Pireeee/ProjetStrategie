@@ -15,6 +15,7 @@ public class Case {
             this.ressource = new Ressource(TypeRessource.values()[rand.nextInt(TypeRessource.values().length)]);
         }
 
+
     }
 
 
