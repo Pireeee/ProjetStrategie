@@ -2,10 +2,10 @@ package main;
 
 public class Outil {
     public int niveau;
-    public TypeRessource type;
+    public TypeTravail type;
 
-    public Outil(TypeRessource type) {
-        this.type = type;
+    public Outil(TypeTravail typeTravail) {
+        this.type = typeTravail;
         this.niveau = 1;
     }
 }
