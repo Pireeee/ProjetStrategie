@@ -1,4 +1,4 @@
 public class Ressource {
-    public TypeResource type;
+    public TypeRessource type;
     public int quantite;
 }
