@@ -1,22 +1,27 @@
 package main.unite;
 
+import main.Case;
 import main.Outil;
 import main.TypeRessource;
 import main.TypeTravail;
 
+import javax.swing.text.Position;
+
 public class UniteSimple extends UniteAbstract{
-    public String nom;
     public boolean expert;
     public boolean monte;
     public Outil outil;
     public int exp;
 
-    public UniteSimple(String nom, TypeTravail typeTravail) {
+    public UniteSimple(String nom, TypeTravail typeTravail, Case position) {
         this.nom = nom;
         this.outil = new Outil(typeTravail);
         this.expert = false;
         this.monte = false;
         this.exp = 0;
+        this.position = position;
+        this.vitesse = 1;
+        this.cout = 1;
     }
 
     @Override

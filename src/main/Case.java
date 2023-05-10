@@ -18,9 +18,17 @@ public class Case {
     }
     public void consomerRessource(Outil outil){
         if (ressource != null) {
-            if(outil.estBonOutil(ressource.type))
-                ressource.quantite --;
+            if(outil.estBonOutil(ressource.type)) {
+                ressource.quantite--;
+                System.out.println("Ressource consomée, il en reste " + ressource.quantite);
+            }
+            else {
+                System.out.println("Mauvais outil");
+                return;
+            }
         }
+        else
+            System.out.println("Pas de ressource");
     }
 
 

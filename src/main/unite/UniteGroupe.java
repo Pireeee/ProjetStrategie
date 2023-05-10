@@ -5,8 +5,11 @@ import main.TypeRessource;
 import java.util.List;
 
 public class UniteGroupe extends UniteAbstract{
-    public String nom;
     public List<UniteSimple> unites;
+
+    public UniteGroupe(List<UniteSimple> unites) {
+        this.unites = unites;
+    }
 
     @Override
     public void ConsomerNourriture(int cout) {

@@ -3,6 +3,7 @@ import main.Case;
 import main.TypeRessource;
 
 public abstract class UniteAbstract {
+    public String nom;
     public int vitesse;
     public int cout;
     public Case position;
