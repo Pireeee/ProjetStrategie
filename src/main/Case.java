@@ -16,6 +16,12 @@ public class Case {
             this.ressource = new Ressource(TypeRessource.values()[rand.nextInt(TypeRessource.values().length)]);
         }
     }
+    public void consomerRessource(Outil outil){
+        if (ressource != null) {
+            if(outil.estBonOutil(ressource.type))
+                ressource.quantite --;
+        }
+    }
 
 
 }

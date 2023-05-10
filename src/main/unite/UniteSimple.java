@@ -18,4 +18,25 @@ public class UniteSimple extends UniteAbstract{
         this.monte = false;
         this.exp = 0;
     }
+
+    @Override
+    public void ConsomerNourriture(int cout) {
+    }
+
+    @Override
+    public void travailler() {
+        position.consomerRessource(outil);
+        if (exp<5)
+            exp++;
+        else {
+            expert = true;
+            position.consomerRessource(outil);
+        }
+    }
+
+    @Override
+    public void seDeplacer(int x, int y) {
+
+    }
+
 }

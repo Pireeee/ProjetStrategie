@@ -8,4 +8,7 @@ public class Outil {
         this.type = typeTravail;
         this.niveau = 1;
     }
+    public boolean estBonOutil(TypeRessource typeRessource){
+        return type.estBonOutil(typeRessource);
+    }
 }

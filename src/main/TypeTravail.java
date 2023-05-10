@@ -1,7 +1,20 @@
 package main;
 
+import java.util.Arrays;
+
 public enum TypeTravail {
-    FERMIER,
-    BUCHERON,
-    MINEUR,
+    FERMIER(TypeRessource.NOURRITURE),
+    BUCHERON(TypeRessource.BOIS),
+    MINEUR(TypeRessource.OR,TypeRessource.PIERRE),
+    ;
+    
+    private final TypeRessource[] typeRessource;
+
+    TypeTravail(TypeRessource... typeRessource) {
+        this.typeRessource = typeRessource;
+    }
+
+    public boolean estBonOutil(TypeRessource typeRessource){
+        return Arrays.stream(this.typeRessource).anyMatch(typeRessource1 -> typeRessource1 == typeRessource);
+    }
 }
