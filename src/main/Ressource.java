@@ -1,3 +1,4 @@
+package main;
 import static java.lang.Math.random;
 
 public class Ressource {
