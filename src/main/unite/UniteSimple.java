@@ -1,9 +1,6 @@
 package main.unite;
 
-import main.Case;
-import main.Outil;
-import main.TypeRessource;
-import main.TypeTravail;
+import main.*;
 
 import javax.swing.text.Position;
 
@@ -25,11 +22,17 @@ public class UniteSimple extends UniteAbstract{
     }
 
     @Override
-    public void ConsomerNourriture(int cout) {
+    public void consomerNourriture(int cout) {
     }
 
     @Override
     public void travailler() {
+        try {
+            consomerNourriture(cout);
+        }
+        catch (Exception e){
+            System.out.println(nom + " n'a pas assez de nourriture pour travailler");
+        }
         position.consomerRessource(outil);
         if (exp<5)
             exp++;
@@ -37,6 +40,7 @@ public class UniteSimple extends UniteAbstract{
             expert = true;
             position.consomerRessource(outil);
         }
+
     }
 
     @Override

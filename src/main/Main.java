@@ -51,7 +51,4 @@ public class Main {
             tour();
         }
     }
-    private void putRessource(TypeRessource typeRessource, int nb){
-        banque.put(typeRessource, banque.get(typeRessource) + nb);
-    }
 }
