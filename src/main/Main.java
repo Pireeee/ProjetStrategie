@@ -11,16 +11,16 @@ import java.util.Map;
 public class Main {
     private final Carte carte;
     private final List<UniteAbstract> listeUnite = new ArrayList<>();
-    private final Map<TypeRessource, Integer> banque;
+    private final Inventaire inventaire = Inventaire.getInstance();
 
     private Main() {
         carte = new Carte(10, 10);
-        banque = new HashMap<>();
+        //ajoute 10 de chaque ressource
         for (TypeRessource typeRessource : TypeRessource.values()) {
-            banque.put(typeRessource, 10);
+            inventaire.ajouterRessource(typeRessource, 10);
         }
         //ajoute 20 nourritures
-        banque.put(TypeRessource.NOURRITURE, banque.get(TypeRessource.NOURRITURE) + 20);
+        inventaire.ajouterRessource(TypeRessource.NOURRITURE,  20);
     }
 
     private void run() {
@@ -35,9 +35,9 @@ public class Main {
         main.run();
     }
     public void afficherBanque(){
-        System.out.println("Banque :");
+        System.out.println("Inventaire :");
         for (TypeRessource typeRessource : TypeRessource.values()) {
-            System.out.println(typeRessource + " : " + banque.get(typeRessource));
+            System.out.println(typeRessource + " : " + inventaire.get(typeRessource));
         }
     }
     private void tour(){
