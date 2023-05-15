@@ -12,7 +12,7 @@ public class UniteGroupe extends UniteAbstract{
     }
 
     @Override
-    public void ConsomerNourriture(int cout) {
+    public void consomerNourriture(int cout) {
 
     }
 
