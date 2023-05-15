@@ -1,12 +1,17 @@
 package main;
+import main.unite.UniteAbstract;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import static java.lang.Math.random;
 
 public class Case {
-    public int x;
-    public int y;
-    public Ressource ressource;
+    private int x;
+    private int y;
+    private Ressource ressource;
+    private final List<UniteAbstract> listeUnites = new ArrayList<>();
 
     public Case(int x, int y) {
         this.x = x;
@@ -31,7 +36,24 @@ public class Case {
             System.out.println("Pas de ressource");
     }
 
+    public int getX() {
+        return this.x;
+    }
 
+    public int getY() {
+        return this.y;
+    }
+
+    public Ressource getRessource() {
+        return this.ressource;
+    }
+
+    public List<UniteAbstract> getListeUnites() {
+        return this.listeUnites;
+    }
+    public void ajouterUnite(UniteAbstract unite){
+        this.listeUnites.add(unite);
+    }
 }
 
 
