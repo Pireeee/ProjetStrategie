@@ -14,7 +14,11 @@ public class Inventaire {
         return instance;
     }
     public Inventaire() {
-        this.ressources = new HashMap<>();
+        this.ressources = new HashMap<TypeRessource,Integer>();
+        this.ressources.put(TypeRessource.NOURRITURE,0);
+        this.ressources.put(TypeRessource.OR,0);
+        this.ressources.put(TypeRessource.BOIS,0);
+        this.ressources.put(TypeRessource.PIERRE,0);
     }
 
     public void ajouterRessource(TypeRessource typeRessource, int quantite){
@@ -29,5 +33,10 @@ public class Inventaire {
     public int get(TypeRessource typeRessource){
         return ressources.get(typeRessource);
     }
-
+    public void afficher(){
+        System.out.println("Inventaire :");
+        for (TypeRessource typeRessource : TypeRessource.values()) {
+            System.out.println(typeRessource + " : " + this.get(typeRessource));
+        }
+    }
 }

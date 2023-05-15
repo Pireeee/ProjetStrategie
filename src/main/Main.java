@@ -34,17 +34,12 @@ public class Main {
         Main main = new Main();
         main.run();
     }
-    public void afficherBanque(){
-        System.out.println("Inventaire :");
-        for (TypeRessource typeRessource : TypeRessource.values()) {
-            System.out.println(typeRessource + " : " + inventaire.get(typeRessource));
-        }
-    }
+
     private void tour(){
         for (UniteAbstract unite : listeUnite) {
             unite.travailler();
         }
-        afficherBanque();
+        inventaire.afficher();
     }
     private void tour(int nbTour){
         for (int i = 0; i < nbTour; i++) {
