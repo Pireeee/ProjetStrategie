@@ -1,3 +1,4 @@
+package main;
 import static java.lang.Math.random;
 
 public class Ressource {
@@ -8,6 +9,4 @@ public class Ressource {
         this.type = type;
         this.quantite = (int) (random()*10);
     }
-
-
 }
