@@ -31,7 +31,7 @@ public class UniteSimple extends UniteAbstract{
         catch (Exception e){
             System.out.println(nom + " n'a pas assez de nourriture pour travailler");
         }
-        System.out.print(nom + "(" + this.getPosition().getX() + " " + this.getPosition().getY() + ") :");
+        System.out.print(nom + "(" + this.getPosition().getX() + "," + this.getPosition().getY() + ") :");
         this.getPosition().consomerRessource(outil);
         if (exp<5)
             exp++;
