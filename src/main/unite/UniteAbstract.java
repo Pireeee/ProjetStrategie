@@ -13,7 +13,10 @@ public abstract class UniteAbstract {
         Inventaire.getInstance().retirerRessource(TypeRessource.NOURRITURE, cout);
     }
     public abstract void travailler();
-    public abstract void seDeplacer(int x,int y);
+    public void seDeplacer(int x,int y){
+        this.getPosition().setX(x);
+        this.getPosition().setY(y);
+    }
 
     public Case getPosition() {
         return this.position;
@@ -27,5 +30,6 @@ public abstract class UniteAbstract {
     public int getY(){
         return this.position.getY();
     }
+
 }
 

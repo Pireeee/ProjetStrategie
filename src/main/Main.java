@@ -39,6 +39,8 @@ public class Main {
         inventaire.afficher();
         System.out.println("Phase de travail :");
         carte.travailler();
+        System.out.println("Phase de déplacement :");
+        carte.deplacer();
         System.out.println("Fin du tour");
     }
     private void tour(int nbTour){

@@ -86,4 +86,19 @@ public class Carte {
             }
         }
     }
+    public void deplacer(){
+        /*for(int i = 0; i < this.x; i++){
+            for(int j = 0; j < this.y; j++){
+                for(UniteAbstract unite : this.cases.get(i).get(j).getListeUnites()){
+                    unite.deplacer();
+                }
+            }
+        }*/
+        deplacerUnite(this.get(2,3).getListeUnites().get(0),3,3);
+    }
+    public void deplacerUnite(UniteAbstract unite, int x, int y){
+        this.get(unite.getX(),unite.getY()).getListeUnites().remove(unite);
+        this.get(x,y).getListeUnites().add(unite);
+        unite.seDeplacer(x, y);
+    }
 }
