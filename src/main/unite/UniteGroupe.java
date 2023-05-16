@@ -12,11 +12,6 @@ public class UniteGroupe extends UniteAbstract{
     }
 
     @Override
-    public void consomerNourriture(int cout) {
-
-    }
-
-    @Override
     public void travailler() {
         for(UniteSimple unite : unites)
             unite.travailler();

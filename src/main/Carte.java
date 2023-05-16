@@ -7,15 +7,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Carte {
-    public int largeur;
-    public int hauteur;
+    public int x;
+    public int y;
     public List<List<Case>> cases;
     private int nbRessource;
     private static Carte instance;
 
     public Carte(int largeur, int hauteur, List<List<Case>> cases) {
-        this.largeur = largeur;
-        this.hauteur = hauteur;
+        this.x = largeur;
+        this.y = hauteur;
         this.cases = cases;
     }
 
@@ -35,14 +35,21 @@ public class Carte {
         return instance;
     }
     public void afficher(){
-        for (int i = 0; i < this.hauteur; i++) {
-            for (int j = 0; j < this.largeur; j++) {
+        System.out.print("  ");
+        for (int longeur = 0; longeur < this.y; longeur++) {
+            System.out.print(longeur);
+            System.out.print("   ");
+        }
+        System.out.println("");
+        for (int i = 0; i < this.x; i++) {
+            System.out.print(i);
+            for (int j = 0; j < this.y; j++) {
                 System.out.print("[");
-                if (this.cases.get(i).get(j).getRessource() == null)
+                if (this.get(i,j).getRessource() == null)
                     System.out.print(" ");
                 else{
                     nbRessource++;
-                    switch (this.cases.get(i).get(j).getRessource().type) {
+                    switch (this.get(i,j).getRessource().type) {
                         case NOURRITURE:
                             System.out.print("N");
                             break;
@@ -57,8 +64,10 @@ public class Carte {
                             break;
                     }
                 }
-                if (!this.cases.get(i).get(j).getListeUnites().isEmpty())
+                if (!this.get(i,j).getListeUnites().isEmpty())
                     System.out.print("¤");
+                else
+                    System.out.print(" ");
                 System.out.print("]");
             }
             System.out.println("");
@@ -66,6 +75,15 @@ public class Carte {
         System.out.println("Nombre de ressource : " + nbRessource);
     }
     public Case get(int x, int y){
-        return this.cases.get(x).get(y);
+        return this.cases.get(y).get(x);
+    }
+    public void travailler(){
+        for(int i = 0; i < this.x; i++){
+            for(int j = 0; j < this.y; j++){
+                for(UniteAbstract unite : this.cases.get(i).get(j).getListeUnites()){
+                    unite.travailler();
+                }
+            }
+        }
     }
 }

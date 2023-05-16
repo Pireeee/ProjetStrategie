@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static java.lang.Math.random;
+import static main.TypeRessource.NOURRITURE;
 
 public class Case {
     private int x;
@@ -25,7 +25,14 @@ public class Case {
         if (ressource != null) {
             if(outil.estBonOutil(ressource.type)) {
                 ressource.quantite--;
-                System.out.println("Ressource consomée, il en reste " + ressource.quantite);
+                System.out.println("j'ai récolté "+
+                        switch (ressource.type) {
+                            case NOURRITURE -> "de la nourriture";
+                            case BOIS -> "du bois";
+                            case OR -> "de l'or";
+                            case PIERRE -> "de la pierre";
+                        }
+                        +", il en reste " + ressource.quantite);
             }
             else {
                 System.out.println("Mauvais outil");
@@ -46,6 +53,10 @@ public class Case {
 
     public Ressource getRessource() {
         return this.ressource;
+    }
+
+    public void setRessource(TypeRessource type) {
+        this.ressource = new Ressource(type);
     }
 
     public List<UniteAbstract> getListeUnites() {
