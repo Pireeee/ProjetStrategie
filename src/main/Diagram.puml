@@ -28,7 +28,9 @@ class Carte {
   -int hauteur
   -Case[][] cases
   -int nbRessource;
+  -Carte instance;
 
+  +Carte getInstance()
   +Carte(int largeur, int hauteur)
   +void afficher()
   +void afficher(List<UnitesAbstract> unites)
