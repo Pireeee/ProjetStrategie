@@ -9,12 +9,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private final Carte carte;
-    private final List<UniteAbstract> listeUnite = new ArrayList<>();
+    private final Carte carte = Carte.getInstance(10, 10);
     private final Inventaire inventaire = Inventaire.getInstance();
 
     private Main() {
-        carte = new Carte(10, 10);
         //ajoute 10 de chaque ressource
         for (TypeRessource typeRessource : TypeRessource.values()) {
             inventaire.ajouterRessource(typeRessource, 10);
@@ -24,9 +22,9 @@ public class Main {
     }
 
     private void run() {
-        UniteSimple raf = new UniteSimple("Raphael",TypeTravail.FERMIER,carte.cases[5][6]);
-        listeUnite.add(raf);
-        carte.afficher(listeUnite);
+        UniteSimple raf = new UniteSimple("Raphael",TypeTravail.FERMIER,carte.get(2,3));
+        carte.get(2,3).setRessource(TypeRessource.NOURRITURE);
+        carte.get(raf.getX(),raf.getY()).ajouterUnite(raf);
         tour();
     }
 
@@ -36,10 +34,14 @@ public class Main {
     }
 
     private void tour(){
-        for (UniteAbstract unite : listeUnite) {
-            unite.travailler();
-        }
+        System.out.println("Début du Tour:");
+        carte.afficher();
         inventaire.afficher();
+        System.out.println("Phase de travail :");
+        carte.travailler();
+        System.out.println("Phase de déplacement :");
+        carte.deplacer();
+        System.out.println("Fin du tour");
     }
     private void tour(int nbTour){
         for (int i = 0; i < nbTour; i++) {
