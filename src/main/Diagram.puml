@@ -34,6 +34,10 @@ class Carte {
   +Carte(int largeur, int hauteur)
   +void afficher()
   +void afficher(List<UnitesAbstract> unites)
+  +void travailler()
+  +void deplacer()
+  +void deplacerUnite(UniteAbstract unite, int x, int y)
+  +void caseLaPlusProche(UniteSimple unite)
 }
 
 class Case {

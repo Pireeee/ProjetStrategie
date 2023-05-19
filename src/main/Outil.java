@@ -11,4 +11,7 @@ public class Outil {
     public boolean estBonOutil(TypeRessource typeRessource){
         return type.estBonOutil(typeRessource);
     }
+    public TypeRessource[] getTypeRessource() {
+        return type.getTypeRessource();
+    }
 }
