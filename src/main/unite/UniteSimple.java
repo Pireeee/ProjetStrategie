@@ -61,7 +61,7 @@ public class UniteSimple extends UniteAbstract{
         for(int i = 0; i < Carte.getInstance().getX(); i++){
             for(int j = 0; j < Carte.getInstance().getY(); j++){
                 for (TypeRessource typeRessource : typeRessources) {
-                    if (Carte.getInstance().get(i, j).getTypeRessource() == typeRessource) {
+                    if (Carte.getInstance().get(i, j).getRessource() != null && Carte.getInstance().get(i, j).getTypeRessource() == typeRessource) {
                         int distance = Math.abs(this.getX() - i) + Math.abs(this.getY() - j);
                         if (distance < distanceMin) {
                             distanceMin = distance;

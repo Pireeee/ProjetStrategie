@@ -94,7 +94,6 @@ public class Carte {
             }
         }
     }
-
     //déplace les unités
     public void deplacer(){
         for(int i = 0; i < this.x; i++){
@@ -108,7 +107,6 @@ public class Carte {
     public int getX() {
         return x;
     }
-
     public int getY() {
         return y;
     }

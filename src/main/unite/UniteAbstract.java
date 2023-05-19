@@ -47,6 +47,7 @@ public abstract class UniteAbstract {
         carte.get(x,y).getListeUnites().add(this);
         //on met à jour les coordonnées de l'unité
         this.seDeplacer(x, y);
+        System.out.println(nom + ": je me suis déplacé en ("+x+","+y+")");
     }
 
 }
