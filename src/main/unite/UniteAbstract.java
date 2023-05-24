@@ -13,11 +13,12 @@ public abstract class UniteAbstract {
 
     public abstract void deplacer();
 
+    public abstract void afficher();
+
     public abstract void travailler();
 
-    public void seDeplacer(int x,int y){
-        this.getPosition().setX(x);
-        this.getPosition().setY(y);
+    public void seDeplacer(Case position) {
+        this.setPosition(position);
     }
 
     public Case getPosition() {
@@ -43,12 +44,14 @@ public abstract class UniteAbstract {
         Carte carte = Carte.getInstance();
         //on met l'unité dans la case de destination
         assert carte != null;
-        carte.get(this.getX(),this.getY()).getListeUnites().remove(this);
-        carte.get(x,y).getListeUnites().add(this);
+        carte.get(x,y).setUnite(this);
+        carte.get(this.getX(),this.getY()).setUnite(null);
         //on met à jour les coordonnées de l'unité
-        this.seDeplacer(x, y);
+        this.seDeplacer(carte.get(x,y));
         System.out.println(nom + ": je me suis déplacé en ("+x+","+y+")");
     }
+
+
 
 }
 

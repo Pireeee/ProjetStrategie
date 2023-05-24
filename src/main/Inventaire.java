@@ -36,7 +36,7 @@ public class Inventaire {
     public void afficher(){
         System.out.println("Inventaire :");
         for (TypeRessource typeRessource : TypeRessource.values()) {
-            System.out.println(typeRessource + " : " + this.get(typeRessource));
+            System.out.println(" - "+typeRessource + " : " + this.get(typeRessource));
         }
     }
 }

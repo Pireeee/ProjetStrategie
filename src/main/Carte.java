@@ -3,6 +3,7 @@ package main;
 import main.unite.UniteAbstract;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Carte {
@@ -43,6 +44,7 @@ public class Carte {
     }
 
     public void afficher(){
+        System.out.println("Carte :");
         System.out.print("  ");
         for (int longeur = 0; longeur < this.y; longeur++) {
             System.out.print(longeur);
@@ -72,7 +74,7 @@ public class Carte {
                             break;
                     }
                 }
-                if (!this.get(i,j).getListeUnites().isEmpty())
+                if (this.get(i,j).getUnite() != null)
                     System.out.print("¤");
                 else
                     System.out.print(" ");
@@ -80,30 +82,37 @@ public class Carte {
             }
             System.out.println("");
         }
-        System.out.println("Nombre de ressource : " + nbRessource);
     }
     public Case get(int x, int y){
         return this.cases.get(y).get(x);
     }
+
+    public void afficherCase(int x, int y){
+        this.get(x,y).afficher();
+    }
+
     public void travailler(){
         for(int i = 0; i < this.x; i++){
             for(int j = 0; j < this.y; j++){
-                for(UniteAbstract unite : this.cases.get(i).get(j).getListeUnites()){
-                    unite.travailler();
-                }
+                if(this.get(i,j).getUnite() != null)
+                    this.get(i,j).getUnite().travailler();
             }
         }
     }
     //déplace les unités
-    public void deplacer(){
-        for(int i = 0; i < this.x; i++){
-            for(int j = 0; j < this.y; j++){
-                for(UniteAbstract unite : this.cases.get(i).get(j).getListeUnites()){
-                    unite.deplacer();
+    public void deplacer() {
+        List<List<Case>> carteTemp = this.cases;
+        for (int i = 0; i < this.x; i++) {
+            for (int j = 0; j < this.y; j++) {
+                if (carteTemp.get(j).get(i).getUnite() != null) {
+                    this.get(i, j).getUnite().deplacer();
                 }
             }
         }
     }
+
+
+
     public int getX() {
         return x;
     }

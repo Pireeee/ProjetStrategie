@@ -14,4 +14,9 @@ public class Outil {
     public TypeRessource[] getTypeRessource() {
         return type.getTypeRessource();
     }
+    public void afficher(){
+        System.out.println("Travail :");
+        System.out.println(" - Type : " + this.type);
+        System.out.println(" - Niveau d'experience: " + this.niveau);
+    }
 }

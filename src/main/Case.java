@@ -8,10 +8,10 @@ import java.util.Random;
 import static main.TypeRessource.NOURRITURE;
 
 public class Case {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     private Ressource ressource;
-    private final List<UniteAbstract> listeUnites = new ArrayList<>();
+    private UniteAbstract Unite ;
 
     public Case(int x, int y) {
         this.x = x;
@@ -33,6 +33,11 @@ public class Case {
                             case PIERRE -> "de la pierre";
                         }
                         +", il en reste " + ressource.quantite);
+                if (ressource.quantite == 0) {
+                    System.out.println("Il n'y a plus de ressource sur cette case");
+                    ressource = null;
+                }
+                Inventaire.getInstance().ajouterRessource(ressource.type, 1);
             }
             else {
                 System.out.println("Mauvais outil");
@@ -43,32 +48,31 @@ public class Case {
             System.out.println("Pas de ressource");
     }
 
+    public void afficher(){
+        System.out.println("Case ("+this.x+","+this.y+"): ");
+        if (ressource != null)
+            System.out.println(" - Ressource : "+ressource.type+" ("+ressource.quantite+")");
+        else System.out.println(" - Ressource : Aucune");
+        if (Unite != null)
+            this.Unite.afficher();
+    }
+
     public int getX() {
         return this.x;
     }
     public int getY() {
         return this.y;
     }
-    public void setX(int x){
-        this.x = x;
-    }
-    public void setY(int y){
-        this.y=y;
-    }
 
     public Ressource getRessource() {
         return this.ressource;
     }
 
-    public void setRessource(TypeRessource type) {
-        this.ressource = new Ressource(type);
+    public UniteAbstract getUnite() {
+        return this.Unite;
     }
-
-    public List<UniteAbstract> getListeUnites() {
-        return this.listeUnites;
-    }
-    public void ajouterUnite(UniteAbstract unite){
-        this.listeUnites.add(unite);
+    public void setUnite(UniteAbstract unite){
+        this.Unite = unite;
     }
 
     public TypeRessource getTypeRessource() {
