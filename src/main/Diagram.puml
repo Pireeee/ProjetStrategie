@@ -34,6 +34,9 @@ class Carte {
   +Carte(int largeur, int hauteur)
   +void afficher()
   +void afficher(List<UnitesAbstract> unites)
+  +void travailler()
+  +void deplacer()
+  +void caseLaPlusProche(UniteSimple unite)
 }
 
 class Case {
@@ -83,9 +86,10 @@ abstract class UniteAbstract{
 class UniteGroupe extends UniteAbstract {
   -List<UniteAbstract> unites
 
-  void ConsomerNourriture(cout)
-  void travailler()
-  void seDeplacer(x,y)
+  +void ConsomerNourriture(cout)
+  +void travailler()
+  +void teleporter(x,y)
+  +void deplacer()
 }
 
 class UniteSimple extends UniteAbstract {
@@ -93,10 +97,10 @@ class UniteSimple extends UniteAbstract {
    Outil outil;
    int exp;
 
-   UniteSimple(nom, vitesse, cout, position)
-   void ConsomerNourriture(cout)
-   void travailler()
-   void seDeplacer(x,y)
+   +UniteSimple(nom, vitesse, cout, position)
+   +void ConsomerNourriture(cout)
+   +void travailler()
+   +void deplacer()
 
 }
 

@@ -1,7 +1,6 @@
 package main;
 
 import main.unite.UniteAbstract;
-import main.unite.UniteSimple;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +33,15 @@ public class Carte {
         }
         return instance;
     }
+    public static Carte getInstance() {
+        if (instance != null)
+            return instance;
+        else{
+            System.err.println("Carte non initialisé");
+            return null;
+        }
+    }
+
     public void afficher(){
         System.out.print("  ");
         for (int longeur = 0; longeur < this.y; longeur++) {
@@ -86,19 +94,20 @@ public class Carte {
             }
         }
     }
+    //déplace les unités
     public void deplacer(){
-        /*for(int i = 0; i < this.x; i++){
+        for(int i = 0; i < this.x; i++){
             for(int j = 0; j < this.y; j++){
                 for(UniteAbstract unite : this.cases.get(i).get(j).getListeUnites()){
                     unite.deplacer();
                 }
             }
-        }*/
-        deplacerUnite(this.get(2,3).getListeUnites().get(0),3,3);
+        }
     }
-    public void deplacerUnite(UniteAbstract unite, int x, int y){
-        this.get(unite.getX(),unite.getY()).getListeUnites().remove(unite);
-        this.get(x,y).getListeUnites().add(unite);
-        unite.seDeplacer(x, y);
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
     }
 }

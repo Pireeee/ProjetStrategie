@@ -23,7 +23,6 @@ public class Main {
 
     private void run() {
         UniteSimple raf = new UniteSimple("Raphael",TypeTravail.FERMIER,carte.get(2,3));
-        carte.get(2,3).setRessource(TypeRessource.NOURRITURE);
         carte.get(raf.getX(),raf.getY()).ajouterUnite(raf);
         tour();
     }

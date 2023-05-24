@@ -70,6 +70,10 @@ public class Case {
     public void ajouterUnite(UniteAbstract unite){
         this.listeUnites.add(unite);
     }
+
+    public TypeRessource getTypeRessource() {
+        return this.ressource.type;
+    }
 }
 
 

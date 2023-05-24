@@ -1,5 +1,6 @@
 package main.unite;
 
+import main.Direction;
 import main.TypeRessource;
 
 import java.util.List;
@@ -21,4 +22,17 @@ public class UniteGroupe extends UniteAbstract{
     public void seDeplacer(int x, int y) {
     }
 
+    @Override
+    public int getVitesse() {
+        int vitesse = 0;
+        for(UniteSimple unite : unites)
+            if (unite.getVitesse() > vitesse)
+                vitesse = unite.getVitesse();
+        return vitesse;
+    }
+    @Override
+    public void deplacer(){
+        for(UniteSimple unite : unites)
+            unite.deplacer();
+    }
 }
