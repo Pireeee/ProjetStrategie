@@ -13,7 +13,7 @@ public class Inventaire {
             instance = new Inventaire();
         return instance;
     }
-    public Inventaire() {
+    private Inventaire() {
         this.ressources = new HashMap<TypeRessource,Integer>();
         this.ressources.put(TypeRessource.NOURRITURE,0);
         this.ressources.put(TypeRessource.OR,0);
@@ -36,7 +36,9 @@ public class Inventaire {
     public void afficher(){
         System.out.println("Inventaire :");
         for (TypeRessource typeRessource : TypeRessource.values()) {
-            System.out.println(" - "+typeRessource + " : " + this.get(typeRessource));
+            if (typeRessource != TypeRessource.RIEN){
+                System.out.println(" - "+typeRessource + " : " + this.get(typeRessource));
+            }
         }
     }
 }

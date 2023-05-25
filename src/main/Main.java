@@ -13,7 +13,8 @@ public class Main {
     private Main() {
         //ajoute 10 de chaque ressource
         for (TypeRessource typeRessource : TypeRessource.values()) {
-            inventaire.ajouterRessource(typeRessource, 10);
+            if (typeRessource != TypeRessource.RIEN)
+                inventaire.ajouterRessource(typeRessource, 10);
         }
         //ajoute 20 nourritures
         inventaire.ajouterRessource(TypeRessource.NOURRITURE,  20);
@@ -62,8 +63,8 @@ public class Main {
                 carte.afficher();
                 System.out.println("Quelle case voulez-vous afficher ? [x,y]");
                 String[] coord = scanner.nextLine().split(",");
-                int x = Integer.parseInt(coord[0]);
-                int y = Integer.parseInt(coord[1]);
+                int y = Integer.parseInt(coord[0]);
+                int x = Integer.parseInt(coord[1]);
                 carte.get(x,y).afficher();
                 question();
 

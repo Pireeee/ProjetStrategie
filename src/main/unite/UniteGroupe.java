@@ -21,9 +21,11 @@ public class UniteGroupe extends UniteAbstract{
     @Override
     public int getVitesse() {
         int vitesse = 0;
-        for(UniteSimple unite : unites)
-            if (unite.getVitesse() > vitesse)
+        for(UniteSimple unite : unites){
+            if (unite.getVitesse() > vitesse) {
                 vitesse = unite.getVitesse();
+            }
+        }
         return vitesse;
     }
     @Override
