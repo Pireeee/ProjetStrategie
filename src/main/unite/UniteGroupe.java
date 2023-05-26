@@ -1,17 +1,26 @@
 package main.unite;
 
-import main.Direction;
-import main.TypeRessource;
+import main.Outil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UniteGroupe extends UniteAbstract{
-    public List<UniteSimple> unites;
+    private final List<UniteSimple> unites;
 
     public UniteGroupe(List<UniteSimple> unites) {
         this.unites = unites;
     }
-
+    public UniteGroupe(UniteAbstract unite) {
+        this.unites = new ArrayList<>();
+        if(unite.getClass().isInstance(UniteGroupe.class)){
+            UniteGroupe uniteGroupe = (UniteGroupe) unite;
+            unites.addAll(uniteGroupe.unites);
+        }
+        else{
+            unites.add((UniteSimple) unite);
+        }
+    }
     @Override
     public void travailler() {
         for(UniteSimple unite : unites)
@@ -29,9 +38,9 @@ public class UniteGroupe extends UniteAbstract{
         return vitesse;
     }
     @Override
-    public void deplacer(){
+    public void deplacerDeUnVersDirection(){
         for(UniteSimple unite : unites)
-            unite.deplacer();
+            unite.deplacerDeUnVersDirection();
     }
 
     @Override
@@ -39,5 +48,21 @@ public class UniteGroupe extends UniteAbstract{
         System.out.println(" - Groupe "+this.nom+" :");
         for(UniteSimple unite : unites)
             unite.afficher();
+    }
+
+    @Override
+    public Outil getOutil() {
+        return unites.get(0).getOutil();
+    }
+    public void addUnite(UniteAbstract unite){
+        if(unite.getClass().isInstance(UniteGroupe.class)){
+            UniteGroupe uniteGroupe = (UniteGroupe) unite;
+            for(UniteSimple uniteSimple : uniteGroupe.unites){
+                unites.add(uniteSimple);
+            }
+        }
+        else{
+            unites.add((UniteSimple) unite);
+        }
     }
 }

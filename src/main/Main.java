@@ -1,7 +1,5 @@
 package main;
 
-import com.sun.source.tree.WhileLoopTree;
-import main.unite.UniteAbstract;
 import main.unite.UniteSimple;
 
 import java.util.*;
@@ -21,8 +19,8 @@ public class Main {
     }
 
     private void run() {
-        UniteSimple raf = new UniteSimple("Raphael",TypeTravail.FERMIER,carte.get(2,3));
-        carte.get(raf.getX(),raf.getY()).setUnite(raf);
+        UniteSimple raf = new UniteSimple("Raphael",TypeTravail.FERMIER,carte.getCase(2,3));
+        carte.getCase(raf.getX(),raf.getY()).setUnite(raf);
         boucle();
     }
 
@@ -65,7 +63,7 @@ public class Main {
                 String[] coord = scanner.nextLine().split(",");
                 int y = Integer.parseInt(coord[0]);
                 int x = Integer.parseInt(coord[1]);
-                carte.get(x,y).afficher();
+                carte.getCase(x,y).afficher();
                 question();
 
             } else if (reponse.equals("5")) {
@@ -91,7 +89,7 @@ public class Main {
         carte.travailler();
         System.out.println("");
         System.out.println("Phase de déplacement :");
-        carte.deplacer();
+        carte.deplacerUnite();
         System.out.println("");
         System.out.println("Fin du tour n°"+tour);
     }

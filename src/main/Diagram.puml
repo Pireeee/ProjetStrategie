@@ -5,62 +5,75 @@ class Main {
   -Carte carte
   -List<UniteAbstract> listeUnite
   -Inventaire inventaire
+  -int tour
 
   +Main()
   +void run()
   +void main()
+  +void question()
+  +void boucle()
+  +void clearConsole()
   +void tour()
 }
 
-class Inventory {
+class Inventaire {
   -Map<ResourceType, Integer> resources
   -{static} Inventory instance
 
-  +void add(final ResourceType type, final int amount)
-  +void remove(final ResourceType type, final int amount)
-  +int get(final ResourceType type)
-
   +{static} Inventory getInstance()
+  +void ajouterRessource( type,quantite)
+  +void retirerRessource( type,quantite)
+  +boolean possedeRessource( type,quantite)
+  +int get( type)
+  +void afficher()
 }
 
 class Carte {
   -int largeur
   -int hauteur
   -Case[][] cases
-  -int nbRessource;
   -Carte instance;
 
   +Carte getInstance()
   +Carte(int largeur, int hauteur)
   +void afficher()
-  +void afficher(List<UnitesAbstract> unites)
   +void travailler()
-  +void deplacer()
-  +void caseLaPlusProche(UniteSimple unite)
+  +void deplacerUnite()
+  +Case getCase(x,y)
+  +int getX()
+  +int getY()
 }
 
 class Case {
   -int x
   -int y
   -int Ressource ressource
+  -UniteAbstract unite
 
-    +Case(int x, int y)
-    +void ConsomerRessource();
+  +Case(x,y)
+  +void ConsomerRessource(outil);
+  +void afficher()
+  +int getX()
+  +int getY()
+  +Ressource getRessource()
+  +UniteAbstract getUnite()
+  +UniteAbstract setUnite(unite)
 }
 
 enum TypeResource {
-  +{field} BOIS (0.3,50)
-  +{field} OR (0.2,50)
-  +{field} PIERRE (0.3,50)
-  +{field} NOURRITURE (0.3,50)
+  +{field} BOIS (50,"B","du bois")
+  +{field} OR (50,"O","de l'or")
+  +{field} PIERRE (50,"P","de la pierre")
+  +{field} NOURRITURE (50,"N","de la nourriture")
 
-  -float chance
   -int tailleMax
-
-  +float getChance()
-  +int getTailleMax()
+  -String symbole
+  -String recolte
 
   +TypeRessource(float chance, int tailleMax)
+  +int getTailleMax()
+  +String getSymbole()
+  +String getRecolte()
 }
 enum TypeTravail {
   +{field} FERMIER (NOURRITURE)
@@ -71,16 +84,27 @@ enum TypeTravail {
 
   +TypeTravail(TypeRessource)
   +boolean estBonOutil(TypeRessource)
+  +TypeRessource[] getTypeRessource()
 }
 abstract class UniteAbstract{
   -String nom
-  int vitesse
-  int cout
-  Case position
+  -int vitesse
+  -int cout
+  -Case position
 
-  {abstract} void ConsomerNourriture(cout)
-  {abstract} void travailler()
-  {abstract} void seDeplacer(x,y)
+
+  +{abstract} void deplacer()
+  +{abstract} void afficher()
+  +{abstract} void travailler()
+  +void seDeplacer(position)
+  +void ConsomerNourriture(cout)
+  +Case getPosition()
+  +void setPosition(position)
+  +int getX()
+  +int getY()
+  +int getVitesse()
+  +void setVitesse(vitesse)
+  +void teleporter(x,y)
 }
 
 class UniteGroupe extends UniteAbstract {
