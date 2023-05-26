@@ -19,20 +19,25 @@ public class UniteGroupe extends UniteAbstract{
     }
 
     @Override
-    public void seDeplacer(int x, int y) {
-    }
-
-    @Override
     public int getVitesse() {
         int vitesse = 0;
-        for(UniteSimple unite : unites)
-            if (unite.getVitesse() > vitesse)
+        for(UniteSimple unite : unites){
+            if (unite.getVitesse() > vitesse) {
                 vitesse = unite.getVitesse();
+            }
+        }
         return vitesse;
     }
     @Override
     public void deplacer(){
         for(UniteSimple unite : unites)
             unite.deplacer();
+    }
+
+    @Override
+    public void afficher() {
+        System.out.println(" - Groupe "+this.nom+" :");
+        for(UniteSimple unite : unites)
+            unite.afficher();
     }
 }

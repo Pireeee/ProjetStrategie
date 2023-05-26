@@ -43,6 +43,16 @@ public class UniteSimple extends UniteAbstract{
         this.cheminLePlusCourt(this.ressouceLaPlusProche(this.outil.getTypeRessource()));
     }
 
+    @Override
+    public void afficher() {
+        System.out.println("    Unite "+ nom + ":");
+        outil.afficher();
+        System.out.println("     - Expert : " + expert);
+        System.out.println("     - Monté : " + monte);
+        System.out.println("     - Expérience : " + exp);
+        System.out.println("     - Vitesse : " + this.getVitesse());
+    }
+
     public void deplacer(Direction direction) {
         int x = this.getX();
         int y = this.getY();

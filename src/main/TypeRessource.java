@@ -1,25 +1,34 @@
 package main;
 
 public enum TypeRessource {
-    BOIS(12,3),
-    OR(1,1),
-    PIERRE(1,1),
-    NOURRITURE(1,1),
+    BOIS(7,"B","du bois"),
+    OR(8,"O","de l'or"),
+    PIERRE(5, "P","de la pierre"),
+    NOURRITURE(30,"N","de la nourriture"),
+    RIEN(0," ",""),
     ;
-    private final float chance;
+
     private final int tailleMax;
+    private final String Initiale;
+    private final String recolte;
 
-    TypeRessource(float chance, int tailleMax) {
-        this.chance = chance;
+    TypeRessource( int tailleMax, String Initiale, String recolte) {
+
         this.tailleMax = tailleMax;
-    }
-
-    public float getChance() {
-        return this.chance;
+        this.Initiale = Initiale;
+        this.recolte = recolte;
     }
 
     public int getTailleMax() {
         return this.tailleMax;
+    }
+
+    public String getInitiale() {
+        return Initiale;
+    }
+
+    public String getRecolte() {
+        return recolte;
     }
 }
 
