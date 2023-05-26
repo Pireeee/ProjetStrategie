@@ -20,10 +20,8 @@ public class UniteSimple extends UniteAbstract{
 
     @Override
     public void travailler() {
-        try {
-            consomerNourriture(cout);
-        }
-        catch (Exception e){
+        Inventaire inventaire = Inventaire.getInstance();
+        if (!inventaire.possedeRessource(TypeRessource.NOURRITURE,cout)){
             System.out.println(nom + " n'a pas assez de nourriture pour travailler");
             return;
         }
@@ -35,7 +33,6 @@ public class UniteSimple extends UniteAbstract{
             expert = true;
             this.getPosition().consomerRessource(this.getOutil());
         }
-
     }
     @Override
     public void deplacerDeUnVersDirection(){

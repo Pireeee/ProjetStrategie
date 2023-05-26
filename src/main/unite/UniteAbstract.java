@@ -23,6 +23,10 @@ public abstract class UniteAbstract {
     }
 
     public void deplacer(){
+        //regarde si il est sur une bonne case
+        if(this.getOutil().estBonOutil(this.getPosition().getTypeRessource())){
+            return;
+        }
         Case ressourceLaPlusProche = ressouceLaPlusProche(this.getOutil().getTypeRessource());
         for (int i = 0; i < this.getVitesse(); i++) {
             this.deplacerDeUnVersDirection(cheminLePlusCourt(ressourceLaPlusProche));
@@ -55,8 +59,10 @@ public abstract class UniteAbstract {
                 }
             } else {
                 System.out.println(nom+" ne peut pas aller sur la case ("+x+","+y+") car il y a une unité avec un outil différent");
-                return;
             }
+        }
+        else {
+            //il n'y a pas d'unité
             this.teleporter(x, y);
         }
     }

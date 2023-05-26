@@ -8,9 +8,6 @@ import java.util.List;
 public class UniteGroupe extends UniteAbstract{
     private final List<UniteSimple> unites;
 
-    public UniteGroupe(List<UniteSimple> unites) {
-        this.unites = unites;
-    }
     public UniteGroupe(UniteAbstract unite) {
         this.unites = new ArrayList<>();
         if(unite.getClass().isInstance(UniteGroupe.class)){
@@ -18,6 +15,7 @@ public class UniteGroupe extends UniteAbstract{
             unites.addAll(uniteGroupe.unites);
         }
         else{
+            //TODO demande un nom de groupe au joueur
             unites.add((UniteSimple) unite);
         }
     }

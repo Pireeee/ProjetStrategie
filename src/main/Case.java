@@ -23,10 +23,10 @@ public class Case {
         }
     }
 
-    public void consomerRessource(Outil outil){
+    public Boolean consomerRessource(Outil outil){
         if (ressource == null) {
             System.out.println("Pas de ressource");
-            return;
+            return false;
         }
         if(outil.estBonOutil(ressource.type)) {
             ressource.quantite--;
@@ -36,11 +36,12 @@ public class Case {
                 ressource = null;
             }
             Inventaire.getInstance().ajouterRessource(ressource.type, 1);
+            this.checkRessource();
         }
         else {
             System.out.println("Mauvais outil");
-            return;
         }
+        return true;
     }
 
     public void afficher(){
@@ -52,6 +53,12 @@ public class Case {
 
     public boolean aUneUnite() {
         return this.unite != null;
+    }
+
+    public void checkRessource(){
+        if (ressource.quantite == 0) {
+            ressource = new Ressource(RIEN);
+        }
     }
 
     public int getX() {

@@ -1,5 +1,7 @@
 package main;
 
+import main.unite.UniteAbstract;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,14 +83,20 @@ public class Carte {
     //déplace les unités
     public void deplacerUnite() {
         List<List<Case>> carteTemp = this.cases;
+        List<UniteAbstract> uniteDeplacees = new ArrayList<>();
         for (int i = 0; i < this.x; i++) {
             for (int j = 0; j < this.y; j++) {
                 if (carteTemp.get(j).get(i).getUnite() != null) {
-                    this.getCase(i, j).getUnite().deplacer();
+                    UniteAbstract unite = this.getCase(i, j).getUnite();
+                    if (!uniteDeplacees.contains(unite)) {
+                        unite.deplacer();
+                        uniteDeplacees.add(unite);
+                    }
                 }
             }
         }
     }
+
 
     public Case getCase(int x, int y){
         return this.cases.get(y).get(x);
