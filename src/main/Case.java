@@ -23,20 +23,19 @@ public class Case {
         }
     }
 
-    public Boolean consomerRessource(Outil outil){
-        if (ressource == null) {
+    public boolean consomerRessource(Outil outil, boolean expert){
+        if (ressource == null||ressource.type == RIEN) {
             System.out.println("Pas de ressource");
             return false;
         }
         if(outil.estBonOutil(ressource.type)) {
-            ressource.quantite--;
-            System.out.println("j'ai récolté "+ ressource.type.getRecolte() +", il en reste " + ressource.quantite);
-            if (ressource.quantite == 0) {
-                System.out.println("Il n'y a plus de ressource sur cette case");
-                ressource = null;
-            }
-            Inventaire.getInstance().ajouterRessource(ressource.type, 1);
             this.checkRessource();
+            int forceDeTravail = expert ? outil.getNiveau() : outil.getNiveau()*2;
+            ressource.quantite -= forceDeTravail;
+            System.out.println("j'ai récolté "+ ressource.type.getRecolte() +", il en reste " + ressource.quantite);
+            Inventaire.getInstance().ajouterRessource(ressource.type, forceDeTravail);
+            this.checkRessource();
+            outil.ameliorer();
         }
         else {
             System.out.println("Mauvais outil");
@@ -56,7 +55,7 @@ public class Case {
     }
 
     public void checkRessource(){
-        if (ressource.quantite == 0) {
+        if (ressource.quantite <= 0) {
             ressource = new Ressource(RIEN);
         }
     }

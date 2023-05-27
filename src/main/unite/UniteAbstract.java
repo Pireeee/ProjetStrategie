@@ -4,11 +4,9 @@ import main.*;
 public abstract class UniteAbstract {
     public String nom;
     private int vitesse;
-    public int cout;
+    private int cout;
     private Case position;
     private Outil outil;
-
-    public abstract void deplacerDeUnVersDirection();
 
     public abstract void afficher();
 
@@ -118,9 +116,7 @@ public abstract class UniteAbstract {
         this.setPosition(carte.getCase(x,y));
         System.out.println(nom + ": je me suis déplacé en ("+x+","+y+")");
     }
-    public void consomerNourriture(int cout) {
-        Inventaire.getInstance().retirerRessource(TypeRessource.NOURRITURE, cout);
-    }
+
     public Case getPosition() {
         return this.position;
     }
@@ -140,6 +136,12 @@ public abstract class UniteAbstract {
         this.vitesse = vitesse;
     }
 
+    public int getCout() {
+        return this.cout;
+    }
+    public void setCout(int cout) {
+        this.cout = cout;
+    }
 
 
 

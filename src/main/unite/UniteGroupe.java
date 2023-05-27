@@ -1,5 +1,6 @@
 package main.unite;
 
+import main.Direction;
 import main.Outil;
 
 import java.util.ArrayList;
@@ -36,9 +37,9 @@ public class UniteGroupe extends UniteAbstract{
         return vitesse;
     }
     @Override
-    public void deplacerDeUnVersDirection(){
+    public void deplacerDeUnVersDirection(Direction direction){
         for(UniteSimple unite : unites)
-            unite.deplacerDeUnVersDirection();
+            unite.deplacerDeUnVersDirection(direction);
     }
 
     @Override
@@ -52,12 +53,11 @@ public class UniteGroupe extends UniteAbstract{
     public Outil getOutil() {
         return unites.get(0).getOutil();
     }
+
     public void addUnite(UniteAbstract unite){
         if(unite.getClass().isInstance(UniteGroupe.class)){
             UniteGroupe uniteGroupe = (UniteGroupe) unite;
-            for(UniteSimple uniteSimple : uniteGroupe.unites){
-                unites.add(uniteSimple);
-            }
+            unites.addAll(uniteGroupe.unites);
         }
         else{
             unites.add((UniteSimple) unite);
