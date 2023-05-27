@@ -53,7 +53,7 @@ public class UniteSimple extends UniteAbstract{
         this.exp++;
         if (this.exp == 5){
             this.expert = true;
-            this.setVitesse(2);
+            this.setVitesse(this.getVitesse()+1);
         }
     }
 
