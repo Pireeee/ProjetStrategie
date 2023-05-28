@@ -7,8 +7,6 @@ public class Ressource {
 
     public Ressource(TypeRessource type) {
         this.type = type;
-        this.quantite = (int) (random()*10);
+        this.quantite = (int) (random()* type.getTailleMax());
     }
-
-
 }

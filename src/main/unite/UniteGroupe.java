@@ -1,5 +1,6 @@
 package main.unite;
 
+import main.Direction;
 import main.TypeRessource;
 
 import java.util.List;
@@ -12,18 +13,31 @@ public class UniteGroupe extends UniteAbstract{
     }
 
     @Override
-    public void consomerNourriture(int cout) {
-
-    }
-
-    @Override
     public void travailler() {
         for(UniteSimple unite : unites)
             unite.travailler();
     }
 
     @Override
-    public void seDeplacer(int x, int y) {
+    public int getVitesse() {
+        int vitesse = 0;
+        for(UniteSimple unite : unites){
+            if (unite.getVitesse() > vitesse) {
+                vitesse = unite.getVitesse();
+            }
+        }
+        return vitesse;
+    }
+    @Override
+    public void deplacer(){
+        for(UniteSimple unite : unites)
+            unite.deplacer();
     }
 
+    @Override
+    public void afficher() {
+        System.out.println(" - Groupe "+this.nom+" :");
+        for(UniteSimple unite : unites)
+            unite.afficher();
+    }
 }

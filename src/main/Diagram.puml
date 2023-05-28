@@ -1,0 +1,129 @@
+@startuml
+skinparam groupInheritance 2
+
+class Main {
+  -Carte carte
+  -List<UniteAbstract> listeUnite
+  -Inventaire inventaire
+
+  +Main()
+  +void run()
+  +void main()
+  +void tour()
+}
+
+class Inventory {
+  -Map<ResourceType, Integer> resources
+  -{static} Inventory instance
+
+  +void add(final ResourceType type, final int amount)
+  +void remove(final ResourceType type, final int amount)
+  +int get(final ResourceType type)
+
+  +{static} Inventory getInstance()
+}
+
+class Carte {
+  -int largeur
+  -int hauteur
+  -Case[][] cases
+  -int nbRessource;
+  -Carte instance;
+
+  +Carte getInstance()
+  +Carte(int largeur, int hauteur)
+  +void afficher()
+  +void afficher(List<UnitesAbstract> unites)
+  +void travailler()
+  +void deplacer()
+  +void caseLaPlusProche(UniteSimple unite)
+}
+
+class Case {
+  -int x
+  -int y
+  -int Ressource ressource
+
+    +Case(int x, int y)
+    +void ConsomerRessource();
+}
+
+enum TypeResource {
+  +{field} BOIS (0.3,50)
+  +{field} OR (0.2,50)
+  +{field} PIERRE (0.3,50)
+  +{field} NOURRITURE (0.3,50)
+
+  -float chance
+  -int tailleMax
+
+  +float getChance()
+  +int getTailleMax()
+
+  +TypeRessource(float chance, int tailleMax)
+}
+enum TypeTravail {
+  +{field} FERMIER (NOURRITURE)
+  +{field} BUCHEROON (BOIS)
+  +{field} MINEUR (OR,PIERRE)
+
+  -{final} TypeRessource[] typeRessource
+
+  +TypeTravail(TypeRessource)
+  +boolean estBonOutil(TypeRessource)
+}
+abstract class UniteAbstract{
+  -String nom
+  int vitesse
+  int cout
+  Case position
+
+  {abstract} void ConsomerNourriture(cout)
+  {abstract} void travailler()
+  {abstract} void seDeplacer(x,y)
+}
+
+class UniteGroupe extends UniteAbstract {
+  -List<UniteAbstract> unites
+
+  +void ConsomerNourriture(cout)
+  +void travailler()
+  +void teleporter(x,y)
+  +void deplacer()
+}
+
+class UniteSimple extends UniteAbstract {
+   boolean expert
+   Outil outil;
+   int exp;
+
+   +UniteSimple(nom, vitesse, cout, position)
+   +void ConsomerNourriture(cout)
+   +void travailler()
+   +void deplacer()
+
+}
+
+class UniteMonte extends UniteAbstract {
+  -UniteSimple unite
+
+  +void seDeplacer()
+}
+
+class Outil{
+  -int niveau
+  -TypeTravail type
+
+  Outil(type)
+  +boolean estBonOutil(TypeRessource)
+}
+class Ressource{
+  -TypeRessource type
+  -int quantite
+
+  Ressource(type)
+  +int getQuantite()
+  +TypeRessource getType()
+}
+
+@enduml

@@ -1,92 +1,105 @@
 package main;
 
 import main.unite.UniteAbstract;
-import main.unite.UniteSimple;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Carte {
-    public int largeur;
-    public int hauteur;
-    public Case[][] cases;
-    private int nbRessource;
+    public int x;
+    public int y;
+    public List<List<Case>> cases;
+    private static Carte instance;
 
-    public Carte(int largeur, int hauteur) {
-        this.largeur = largeur;
-        this.hauteur = hauteur;
-        this.cases = new Case[this.hauteur][this.largeur];
-        for (int i = 0; i < this.hauteur; i++) {
-            for (int j = 0; j < this.largeur; j++) {
-                this.cases[i][j] = new Case(i,j);
+    private Carte(int largeur, int hauteur, List<List<Case>> cases) {
+        this.x = largeur;
+        this.y = hauteur;
+        this.cases = cases;
+    }
+    public static Carte getInstance(int largeur, int hauteur) {
+        if (instance == null) {
+            List<List<Case>> colonnes = new ArrayList<>();
+            for (int i = 0; i < largeur; i++) {
+                List<Case> ligne = new ArrayList<>();
+                for (int j = 0; j < hauteur; j++) {
+                    Case position = new Case(j, i);
+                    ligne.add(j, position);
+                }
+                colonnes.add(i, ligne);
             }
+            instance = new Carte(largeur, hauteur, colonnes);
+        }
+        return instance;
+    }
+    public static Carte getInstance() {
+        if (instance != null)
+            return instance;
+        else{
+            System.err.println("Carte non initialisé");
+            return null;
         }
     }
+
     public void afficher(){
-        for (int i = 0; i < this.hauteur; i++) {
-            for (int j = 0; j < this.largeur; j++) {
-                System.out.print("[");
-                if (this.cases[i][j].ressource == null)
-                    System.out.print(" ");
-                else{
-                    nbRessource++;
-                    switch (this.cases[i][j].ressource.type) {
-                        case NOURRITURE:
-                            System.out.print("N");
-                            break;
-                        case BOIS:
-                            System.out.print("B");
-                            break;
-                        case OR:
-                            System.out.print("O");
-                            break;
-                        case PIERRE:
-                            System.out.print("P");
-                            break;
-                    }
-                }
-                System.out.print("]");
-            }
-            System.out.println("");
+        StringBuilder carte = new StringBuilder();
+        carte.append("Carte :\n");
+        carte.append("  ");
+        for (int longeur = 0; longeur < this.y; longeur++) {
+            carte.append(longeur);
+            carte.append("   ");
         }
-        System.out.println("Nombre de ressource : " + nbRessource);
-    }
-    public void afficher(List<UniteAbstract> unites){
-        for (int i = 0; i < this.hauteur; i++) {
-            for (int j = 0; j < this.largeur; j++) {
-                System.out.print("[");
-                if (this.cases[i][j].ressource == null)
-                    System.out.print(" ");
+        carte.append("<-x \n");
+        for (int i = 0; i < this.x; i++) {
+            carte.append(i);
+            for (int j = 0; j < this.y; j++) {
+                carte.append("[");
+                if (this.get(i,j).getRessource().type == TypeRessource.RIEN){
+                    carte.append(" ");}
                 else{
-                    nbRessource++;
-                    switch (this.cases[i][j].ressource.type) {
-                        case NOURRITURE:
-                            System.out.print("N");
-                            break;
-                        case BOIS:
-                            System.out.print("B");
-                            break;
-                        case OR:
-                            System.out.print("O");
-                            break;
-                        case PIERRE:
-                            System.out.print("P");
-                            break;
-                    }
+                    carte.append(this.get(i,j).getRessource().type.getInitiale());
                 }
-                for (UniteAbstract unite : unites) {
-                    if (unite.position.x == i && unite.position.y == j) {
-                        if(unite instanceof UniteSimple)
-                            System.out.print("¤");
-                        else
-                            System.out.print("@");
-                    }
-
-                }
-                System.out.print("]");
+                if (this.get(i,j).getUnite() != null){
+                    carte.append("¤");}
+                else{
+                    carte.append(" ");}
+                carte.append("]");
             }
-            System.out.println("");
+            carte.append("\n");
         }
-        System.out.println("Nombre de ressource : " + nbRessource);
+        carte.append("^\n");
+        carte.append("|\n");
+        carte.append("y\n");
+        System.out.println(carte.toString());
     }
 
+    public void travailler(){
+        for(int i = 0; i < this.x; i++){
+            for(int j = 0; j < this.y; j++){
+                if(this.get(i,j).getUnite() != null)
+                    this.get(i,j).getUnite().travailler();
+            }
+        }
+    }
+    //déplace les unités
+    public void deplacer() {
+        List<List<Case>> carteTemp = this.cases;
+        for (int i = 0; i < this.x; i++) {
+            for (int j = 0; j < this.y; j++) {
+                if (carteTemp.get(j).get(i).getUnite() != null) {
+                    this.get(i, j).getUnite().deplacer();
+                }
+            }
+        }
+    }
+
+    public Case get(int x, int y){
+        return this.cases.get(y).get(x);
+    }
+    public int getX() {
+        return x;
+    }
+    public int getY() {
+        return y;
+    }
 }

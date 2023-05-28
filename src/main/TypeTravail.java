@@ -17,4 +17,8 @@ public enum TypeTravail {
     public boolean estBonOutil(TypeRessource typeRessource){
         return Arrays.stream(this.typeRessource).anyMatch(typeRessource1 -> typeRessource1 == typeRessource);
     }
+
+    public TypeRessource[] getTypeRessource() {
+        return typeRessource;
+    }
 }
