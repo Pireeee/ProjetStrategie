@@ -26,6 +26,10 @@ public abstract class UniteAbstract {
             return;
         }
         Case ressourceLaPlusProche = ressouceLaPlusProche(this.getOutil().getTypeRessource());
+        if (ressourceLaPlusProche == null) {
+            System.out.println(nom + " ne peut pas se déplacer car il n'y a plus de ressource de type " + this.getOutil().getTypeRessource());
+            return;
+        }
         for (int i = 0; i < this.getVitesse(); i++) {
             this.deplacerDeUnVersDirection(cheminLePlusCourt(ressourceLaPlusProche));
         }

@@ -20,7 +20,7 @@ public class UniteSimple extends UniteAbstract{
     public void travailler() {
         Inventaire inventaire = Inventaire.getInstance();
         //mange de la nourriture suivant l'apetit de l'unitée
-        int faim = this.isExpert() ? this.getCout(): this.getCout()*2;
+        int faim = this.isExpert() ? this.getCout()*2 : this.getCout();
         if (!inventaire.possedeRessource(TypeRessource.NOURRITURE,faim)){
             System.out.println(nom + " n'a pas assez de nourriture pour travailler");
             return;

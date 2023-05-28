@@ -30,7 +30,7 @@ public class Case {
         }
         if(outil.estBonOutil(ressource.type)) {
             this.checkRessource();
-            int forceDeTravail = expert ? outil.getNiveau() : outil.getNiveau()*2;
+            int forceDeTravail = expert ? outil.getNiveau()*2 : outil.getNiveau();
             ressource.quantite -= forceDeTravail;
             System.out.println("j'ai récolté "+ ressource.type.getRecolte() +", il en reste " + ressource.quantite);
             Inventaire.getInstance().ajouterRessource(ressource.type, forceDeTravail);

@@ -20,7 +20,9 @@ public class Main {
 
     private void run() {
         UniteSimple raf = new UniteSimple("Raphael",TypeTravail.FERMIER,carte.getCase(2,3));
+        UniteSimple max = new UniteSimple("Maximilien",TypeTravail.MINEUR,carte.getCase(5,7));
         carte.getCase(raf.getX(),raf.getY()).setUnite(raf);
+        carte.getCase(max.getX(),max.getY()).setUnite(max);
         boucle();
     }
 
