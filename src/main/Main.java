@@ -1,5 +1,6 @@
 package main;
 
+import main.unite.UniteGroupe;
 import main.unite.UniteSimple;
 
 import java.util.*;
@@ -20,8 +21,11 @@ public class Main {
 
     private void run() {
         UniteSimple raf = new UniteSimple("Raphael",TypeTravail.FERMIER,carte.getCase(2,3));
+        UniteSimple Joel = new UniteSimple("Joel",TypeTravail.FERMIER,carte.getCase(2,3));
+        UniteGroupe RaphJoel = new UniteGroupe(raf);
+        RaphJoel.addUnite(Joel);
         UniteSimple max = new UniteSimple("Maximilien",TypeTravail.MINEUR,carte.getCase(5,7));
-        carte.getCase(raf.getX(),raf.getY()).setUnite(raf);
+        carte.getCase(raf.getX(),raf.getY()).setUnite(RaphJoel);
         carte.getCase(max.getX(),max.getY()).setUnite(max);
         boucle();
     }

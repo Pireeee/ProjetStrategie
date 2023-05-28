@@ -1,5 +1,6 @@
 package main.unite;
 
+import main.Case;
 import main.Direction;
 import main.Outil;
 
@@ -63,4 +64,17 @@ public class UniteGroupe extends UniteAbstract{
             unites.add((UniteSimple) unite);
         }
     }
+    @Override
+    public Case getPosition() {
+        return unites.get(0).getPosition();
+    }
+    @Override
+    public int getX() {
+        return unites.get(0).getX();
+    }
+    @Override
+    public int getY() {
+        return unites.get(0).getY();
+    }
+
 }

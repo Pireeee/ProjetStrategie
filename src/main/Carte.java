@@ -1,6 +1,7 @@
 package main;
 
 import main.unite.UniteAbstract;
+import main.unite.UniteGroupe;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +60,13 @@ public class Carte {
                     carte.append(this.getCase(i,j).getRessource().type.getSymbole());
                 }
                 if (this.getCase(i,j).getUnite() != null){
-                    carte.append("¤");}
+                    if (this.getCase(i,j).getUnite().getClass().equals(UniteGroupe.class)){
+                        carte.append("@");
+                    }
+                    else{
+                        carte.append("¤");
+                    }
+                }
                 else{
                     carte.append(" ");}
                 carte.append("]");

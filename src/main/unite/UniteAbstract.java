@@ -27,7 +27,7 @@ public abstract class UniteAbstract {
         }
         Case ressourceLaPlusProche = ressouceLaPlusProche(this.getOutil().getTypeRessource());
         if (ressourceLaPlusProche == null) {
-            System.out.println(nom + " ne peut pas se déplacer car il n'y a plus de ressource de type " + this.getOutil().getTypeRessource());
+            System.out.println(nom + " ne peut pas se déplacer car il n'y a plus de ressource adéquate ");
             return;
         }
         for (int i = 0; i < this.getVitesse(); i++) {
@@ -50,7 +50,7 @@ public abstract class UniteAbstract {
         Case caseDestination = Carte.getInstance().getCase(x, y);
         if (caseDestination.aUneUnite()) {
             //il y a une unité
-            if (caseDestination.getUnite().getOutil() == this.getOutil()) {
+            if (caseDestination.getUnite().getOutil().getTypeTravail() == this.getOutil().getTypeTravail()) {
                 //même outil
                 if (caseDestination.getUnite().getClass().isInstance(UniteGroupe.class)) {
                     //il y a un groupe
