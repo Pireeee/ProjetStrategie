@@ -5,6 +5,7 @@ import main.*;
 public class UniteSimple extends UniteAbstract{
     private boolean expert;
     private int exp;
+    private int fatigue;
 
     public UniteSimple(String nom, TypeTravail typeTravail, Case position) {
         this.nom = nom;
@@ -23,12 +24,16 @@ public class UniteSimple extends UniteAbstract{
         int faim = this.isExpert() ? this.getCout()*2 : this.getCout();
         if (!inventaire.possedeRessource(TypeRessource.NOURRITURE,faim)){
             System.out.println(nom + " n'a pas assez de nourriture pour travailler");
+            checkExpert();
             return;
         }
         System.out.print(nom + "(" + this.getPosition().getX() + "," + this.getPosition().getY() + ") :");
         //l'unité essaye de consomer la ressource sur laquelle elle est.
         if(this.getPosition().consomerRessource(this.getOutil(),this.isExpert())){
             levelUp();
+        }
+        else {
+            checkExpert();
         }
 
     }
@@ -57,4 +62,16 @@ public class UniteSimple extends UniteAbstract{
         }
     }
 
+    public void checkExpert(){
+        if (isExpert()){
+            fatigue++;
+            if (fatigue == 3){
+                System.out.println(nom + " devient une unité simple");
+                this.expert = false;
+                this.exp = 0;
+                this.setVitesse(1);
+                this.setCout(1);
+            }
+        }
+    }
 }

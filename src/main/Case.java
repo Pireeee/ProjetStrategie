@@ -29,13 +29,15 @@ public class Case {
             return false;
         }
         if(outil.estBonOutil(ressource.type)) {
-            this.checkRessource();
             int forceDeTravail = expert ? outil.getNiveau()*2 : outil.getNiveau();
+            if(forceDeTravail > ressource.quantite)
+                forceDeTravail = ressource.quantite;
             ressource.quantite -= forceDeTravail;
             System.out.println("j'ai récolté "+ ressource.type.getRecolte() +", il en reste " + ressource.quantite);
             Inventaire.getInstance().ajouterRessource(ressource.type, forceDeTravail);
-            this.checkRessource();
             outil.ameliorer();
+            this.checkRessource();
+
         }
         else {
             System.out.println("Mauvais outil");

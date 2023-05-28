@@ -31,6 +31,9 @@ public abstract class UniteAbstract {
             return;
         }
         for (int i = 0; i < this.getVitesse(); i++) {
+            if (this.getPosition().equals(ressourceLaPlusProche)) {
+                return;
+            }
             this.deplacerDeUnVersDirection(cheminLePlusCourt(ressourceLaPlusProche));
         }
     }
