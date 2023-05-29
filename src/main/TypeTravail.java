@@ -3,14 +3,15 @@ package main;
 import java.util.Arrays;
 
 public enum TypeTravail {
-    FERMIER(TypeRessource.NOURRITURE),
-    BUCHERON(TypeRessource.BOIS),
-    MINEUR(TypeRessource.OR,TypeRessource.PIERRE),
+    FERMIER("👨‍🌾",TypeRessource.NOURRITURE),
+    BUCHERON("🪓",TypeRessource.BOIS),
+    MINEUR("⛏",TypeRessource.OR,TypeRessource.PIERRE),
     ;
-    
+    private final String symbole;
     private final TypeRessource[] typeRessource;
 
-    TypeTravail(TypeRessource... typeRessource) {
+    TypeTravail(String symbole,TypeRessource... typeRessource) {
+        this.symbole = symbole;
         this.typeRessource = typeRessource;
     }
 
@@ -20,5 +21,8 @@ public enum TypeTravail {
 
     public TypeRessource[] getTypeRessource() {
         return typeRessource;
+    }
+    public String getSymbole() {
+        return symbole;
     }
 }

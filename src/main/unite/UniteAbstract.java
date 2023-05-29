@@ -4,9 +4,11 @@ import main.*;
 public abstract class UniteAbstract {
     public String nom;
     private int vitesse;
-    private int cout;
+    int cout;
     private Case position;
     private Outil outil;
+    private int deplacementsRestants = 0;
+    private boolean nourie = false;
 
     public abstract void afficher();
 
@@ -23,6 +25,7 @@ public abstract class UniteAbstract {
     public void deplacer(){
         //regarde si il est sur une bonne case
         if(this.getOutil().estBonOutil(this.getPosition().getTypeRessource())){
+            System.out.println(nom + " est sur une bonne ressource il ne se déplace pas");
             return;
         }
         Case ressourceLaPlusProche = ressouceLaPlusProche(this.getOutil().getTypeRessource());
@@ -30,9 +33,10 @@ public abstract class UniteAbstract {
             System.out.println(nom + " ne peut pas se déplacer car il n'y a plus de ressource adéquate ");
             return;
         }
-        for (int i = 0; i < this.getVitesse(); i++) {
+        while (this.getDeplacementsRestants() > 0) {
             if (this.getPosition().equals(ressourceLaPlusProche)) {
                 return;
+
             }
             this.deplacerDeUnVersDirection(cheminLePlusCourt(ressourceLaPlusProche));
         }
@@ -42,33 +46,43 @@ public abstract class UniteAbstract {
         int x = this.getX();
         int y = this.getY();
         switch (direction) {
-            case HAUT -> y--;
-            case BAS -> y++;
-            case GAUCHE -> x--;
-            case DROITE -> x++;
+            case HAUT -> {
+                if (x < 0) {
+                    System.out.println(nom + " ne peut pas se déplacer car il est en haut de la carte");
+                    return;
+                }
+                x--;
+            }
+            case BAS -> {
+                if (x >= Carte.getInstance().getX()) {
+                    System.out.println(nom + " ne peut pas se déplacer car il est en bas de la carte");
+                    return;
+                }
+                x++;
+            }
+            case GAUCHE -> {
+                if (y < 0) {
+                    System.out.println(nom + " ne peut pas se déplacer car il est à gauche de la carte");
+                    return;
+                }
+                y--;
+            }
+            case DROITE -> {
+                if (y >= Carte.getInstance().getY()) {
+                    System.out.println(nom + " ne peut pas se déplacer car il est à droite de la carte");
+                    return;
+                }
+                y++;
+            }
         }
         Case caseDestination = Carte.getInstance().getCase(x, y);
         if (caseDestination.aUneUnite()) {
-            //il y a une unité
-            if (caseDestination.getUnite().getOutil().getTypeTravail() == this.getOutil().getTypeTravail()) {
-                //même outil
-                if (caseDestination.getUnite().getClass().isInstance(UniteGroupe.class)) {
-                    //il y a un groupe
-                    UniteGroupe uniteGroupe = (UniteGroupe) caseDestination.getUnite();
-                    uniteGroupe.addUnite(this);
-                } else {
-                    //il n'y a pas de groupe
-                    UniteGroupe uniteGroupe = new UniteGroupe(this);
-                    uniteGroupe.addUnite(caseDestination.getUnite());
-                    uniteGroupe.teleporter(caseDestination.getX(), caseDestination.getY());
-                }
-            } else {
-                System.out.println(nom+" ne peut pas aller sur la case ("+x+","+y+") car il y a une unité avec un outil différent");
-            }
+            System.out.println(nom + " ne peut pas se déplacer car il y a une unité sur la case de destination");
         }
         else {
             //il n'y a pas d'unité
             this.teleporter(x, y);
+            this.deplacementsRestants--;
         }
     }
 
@@ -121,7 +135,7 @@ public abstract class UniteAbstract {
         carte.getCase(this.getX(),this.getY()).setUnite(null);
         //on met à jour les coordonnées de l'unité
         this.setPosition(carte.getCase(x,y));
-        System.out.println(nom + ": je me suis déplacé en ("+x+","+y+")");
+        System.out.println(nom +" "+getOutil().getTypeTravail().getSymbole()+ " : je me suis déplacé en ("+x+","+y+")");
     }
 
     public Case getPosition() {
@@ -149,7 +163,15 @@ public abstract class UniteAbstract {
     public void setCout(int cout) {
         this.cout = cout;
     }
-
+    public void initDeplacementsRestants(){
+        this.deplacementsRestants = this.getVitesse();
+    }
+    public void finDeplacement(){
+        this.deplacementsRestants = 0;
+    }
+    public int getDeplacementsRestants(){
+        return this.deplacementsRestants;
+    }
 
 
 

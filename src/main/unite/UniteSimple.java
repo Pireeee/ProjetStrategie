@@ -8,6 +8,7 @@ public class UniteSimple extends UniteAbstract{
     private int fatigue;
 
     public UniteSimple(String nom, TypeTravail typeTravail, Case position) {
+        Carte carte = Carte.getInstance();
         this.nom = nom;
         this.setOutil(new Outil(typeTravail));
         this.expert = false;
@@ -15,8 +16,19 @@ public class UniteSimple extends UniteAbstract{
         this.setPosition(position);
         this.setVitesse(1);
         this.setCout(1);
+        carte.getCase(this.getX(),this.getY()).setUnite(this);
     }
-
+    public UniteSimple(String nom, TypeTravail typeTravail) {
+        this.nom = nom;
+        this.setOutil(new Outil(typeTravail));
+        this.expert = false;
+        this.exp = 0;
+        Carte carte = Carte.getInstance();
+        this.setPosition(carte.getCase((int)(Math.random()* carte.getX()),(int)(Math.random()* carte.getY())));
+        this.setVitesse(1);
+        this.setCout(1);
+        carte.getCase(this.getX(),this.getY()).setUnite(this);
+    }
     @Override
     public void travailler() {
         Inventaire inventaire = Inventaire.getInstance();
@@ -37,11 +49,10 @@ public class UniteSimple extends UniteAbstract{
         }
 
     }
-
     @Override
     public void afficher() {
-        System.out.println(" - Unite "+ nom + ":");
-        getOutil().afficher();
+        System.out.println(" - Unite "+ nom +" " +getOutil().getTypeTravail().getSymbole()+ ":");
+        System.out.println("     - Niveau d'outil : " + this.getOutil().getNiveau());
         if(this.isExpert())
             System.out.println("    - Unité Experte ");
         System.out.println("     - Expérience : " + this.exp);
@@ -73,5 +84,10 @@ public class UniteSimple extends UniteAbstract{
                 this.setCout(1);
             }
         }
+    }
+
+    @Override
+    public int getCout() {
+        return this.isExpert() ? this.cout*2 : this.cout;
     }
 }
