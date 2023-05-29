@@ -1,7 +1,7 @@
 package main.unite;
 import main.*;
 
-public abstract class UniteAbstract {
+public abstract class UniteAbstract extends Produit {
     public String nom;
     private int vitesse;
     int cout;

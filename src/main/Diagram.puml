@@ -80,6 +80,12 @@ enum TypeTravail {
   +{field} FERMIER (NOURRITURE)
   +{field} BUCHEROON (BOIS)
   +{field} MINEUR (OR,PIERRE)
+  +{field} PrixEnRessources prixEnRessources
+  +String  symbole
+  + TypeRessource[] typeRessource
+
+
+
 
   -{final} TypeRessource[] typeRessource
 
@@ -174,4 +180,33 @@ enum Direction {
   +{field} DROITE
 }
 
+class Batiment {
+  +void Créer Produit()
+
+}
+
+class PrixEnRessources{
+  class Builder{
+    +Map<TypeRessource, Integer> prix
+    +Builder() {prix}
+    +Builder prixBois(int prixBois)
+    +Builder prixPierre(int prixPierre)
+    +Builder prixOr(int prixOr)
+    +Builder prixNouriture(int prixNouriture)
+    +PrixEnRessources build() {return new PrixEnRessources}
+    + PrixEnRessources(Builder builder) {prix}
+    + int getPrix(TypeRessource typeRessource)
+
+}
+
+class UsineOutil extends Batiment{
+   +UsineOutil()
+   +void CréerProduit
+}
+
+class UsineUnite extends Batiment{
+  +UsineUnite()
+  +void CréerProduit()
+
+}
 @enduml

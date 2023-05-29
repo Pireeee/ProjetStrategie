@@ -1,7 +1,5 @@
 package main;
 
-import main.batiment.Batiment;
-import main.batiment.TypeBatiment;
 import main.unite.UniteAbstract;
 import main.unite.UniteSimple;
 
@@ -156,6 +154,7 @@ public class Main {
                     break;
                 case "2":
                     carte.deplacerUnite();
+                    updateListUnite();
                     menuTour();
                     break;
                 case "3":

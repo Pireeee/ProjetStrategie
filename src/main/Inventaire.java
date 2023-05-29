@@ -1,5 +1,7 @@
 package main;
 
+import main.batiment.PrixEnRessources;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,5 +42,12 @@ public class Inventaire {
                 System.out.println(" - "+typeRessource + " : " + this.get(typeRessource));
             }
         }
+    }
+    public boolean peuxCréer(TypeTravail typeTravail){
+        PrixEnRessources prix = typeTravail.getPrixEnRessources();
+        return this.possedeRessource(TypeRessource.BOIS,prix.getPrix(TypeRessource.BOIS)) &&
+                this.possedeRessource(TypeRessource.PIERRE,prix.getPrix(TypeRessource.PIERRE)) &&
+                this.possedeRessource(TypeRessource.OR,prix.getPrix(TypeRessource.OR)) &&
+                this.possedeRessource(TypeRessource.NOURRITURE,prix.getPrix(TypeRessource.NOURRITURE));
     }
 }

@@ -6,6 +6,6 @@ public class UsineOutil extends Batiment{
         super();
     }
     public void CréerProduit(){
-        //TODO
+
     }
 }

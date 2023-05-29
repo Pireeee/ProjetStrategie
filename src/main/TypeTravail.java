@@ -1,16 +1,20 @@
 package main;
 
+import main.batiment.PrixEnRessources;
+
 import java.util.Arrays;
 
 public enum TypeTravail {
-    FERMIER("👨‍🌾",TypeRessource.NOURRITURE),
-    BUCHERON("🪓",TypeRessource.BOIS),
-    MINEUR("⛏",TypeRessource.OR,TypeRessource.PIERRE),
+    FERMIER(new PrixEnRessources.Builder().prixNouriture(10).prixOr(5).build(),"👨‍🌾",TypeRessource.NOURRITURE),
+    BUCHERON(new PrixEnRessources.Builder().prixBois(10).prixOr(5).build(),"🪓",TypeRessource.BOIS),
+    MINEUR(new PrixEnRessources.Builder().prixPierre(10).prixOr(5).build(),"⛏",TypeRessource.OR,TypeRessource.PIERRE),
     ;
+    private final PrixEnRessources prixEnRessources;
     private final String symbole;
     private final TypeRessource[] typeRessource;
 
-    TypeTravail(String symbole,TypeRessource... typeRessource) {
+    TypeTravail(PrixEnRessources prixEnRessources, String symbole,TypeRessource... typeRessource) {
+        this.prixEnRessources = prixEnRessources;
         this.symbole = symbole;
         this.typeRessource = typeRessource;
     }
@@ -24,5 +28,9 @@ public enum TypeTravail {
     }
     public String getSymbole() {
         return symbole;
+    }
+
+    public PrixEnRessources getPrixEnRessources() {
+        return prixEnRessources;
     }
 }

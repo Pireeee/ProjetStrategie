@@ -1,6 +1,6 @@
 package main;
 
-public class Outil {
+public class Outil extends Produit {
     private int niveau;
     private TypeTravail type;
 

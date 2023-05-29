@@ -3,9 +3,6 @@ import main.Case;
 
 public abstract class Batiment {
 
-    public Batiment() {
-    }
-
     public abstract void CréerProduit();
 
 

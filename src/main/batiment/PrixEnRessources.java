@@ -1,6 +1,5 @@
 package main.batiment;
 
-
 import main.TypeRessource;
 import java.util.HashMap;
 import java.util.Map;
