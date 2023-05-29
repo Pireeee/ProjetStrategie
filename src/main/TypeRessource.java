@@ -9,13 +9,12 @@ public enum TypeRessource {
     ;
 
     private final int tailleMax;
-    private final String Initiale;
+    private final String symbole;
     private final String recolte;
 
-    TypeRessource( int tailleMax, String Initiale, String recolte) {
-
+    TypeRessource( int tailleMax, String symbole, String recolte) {
         this.tailleMax = tailleMax;
-        this.Initiale = Initiale;
+        this.symbole = symbole;
         this.recolte = recolte;
     }
 
@@ -23,8 +22,8 @@ public enum TypeRessource {
         return this.tailleMax;
     }
 
-    public String getInitiale() {
-        return Initiale;
+    public String getSymbole() {
+        return symbole;
     }
 
     public String getRecolte() {

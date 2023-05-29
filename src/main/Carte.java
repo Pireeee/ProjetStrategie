@@ -1,9 +1,9 @@
 package main;
 
 import main.unite.UniteAbstract;
+import main.unite.UniteGroupe;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Carte {
@@ -54,13 +54,19 @@ public class Carte {
             carte.append(i);
             for (int j = 0; j < this.y; j++) {
                 carte.append("[");
-                if (this.get(i,j).getRessource().type == TypeRessource.RIEN){
+                if (this.getCase(i,j).getRessource().type == TypeRessource.RIEN){
                     carte.append(" ");}
                 else{
-                    carte.append(this.get(i,j).getRessource().type.getInitiale());
+                    carte.append(this.getCase(i,j).getRessource().type.getSymbole());
                 }
-                if (this.get(i,j).getUnite() != null){
-                    carte.append("¤");}
+                if (this.getCase(i,j).getUnite() != null){
+                    if (this.getCase(i,j).getUnite().getClass().equals(UniteGroupe.class)){
+                        carte.append("@");
+                    }
+                    else{
+                        carte.append("¤");
+                    }
+                }
                 else{
                     carte.append(" ");}
                 carte.append("]");
@@ -76,24 +82,30 @@ public class Carte {
     public void travailler(){
         for(int i = 0; i < this.x; i++){
             for(int j = 0; j < this.y; j++){
-                if(this.get(i,j).getUnite() != null)
-                    this.get(i,j).getUnite().travailler();
+                if(this.getCase(i,j).getUnite() != null)
+                    this.getCase(i,j).getUnite().travailler();
             }
         }
     }
     //déplace les unités
-    public void deplacer() {
+    public void deplacerUnite() {
         List<List<Case>> carteTemp = this.cases;
+        List<UniteAbstract> uniteDeplacees = new ArrayList<>();
         for (int i = 0; i < this.x; i++) {
             for (int j = 0; j < this.y; j++) {
                 if (carteTemp.get(j).get(i).getUnite() != null) {
-                    this.get(i, j).getUnite().deplacer();
+                    UniteAbstract unite = this.getCase(i, j).getUnite();
+                    if (!uniteDeplacees.contains(unite)) {
+                        unite.deplacer();
+                        uniteDeplacees.add(unite);
+                    }
                 }
             }
         }
     }
 
-    public Case get(int x, int y){
+
+    public Case getCase(int x, int y){
         return this.cases.get(y).get(x);
     }
     public int getX() {

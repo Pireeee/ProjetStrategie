@@ -1,18 +1,15 @@
 package main;
 import main.unite.UniteAbstract;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-import static main.TypeRessource.NOURRITURE;
 import static main.TypeRessource.RIEN;
 
 public class Case {
     private final int x;
     private final int y;
     private Ressource ressource;
-    private UniteAbstract Unite ;
+    private UniteAbstract unite;
 
     public Case(int x, int y) {
         this.x = x;
@@ -25,51 +22,70 @@ public class Case {
             this.ressource= new Ressource(RIEN);
         }
     }
-    public void consomerRessource(Outil outil){
-        if (ressource == null) {
+
+    public boolean consomerRessource(Outil outil, boolean expert){
+        if (ressource == null||ressource.type == RIEN) {
             System.out.println("Pas de ressource");
-            return;
+            return false;
         }
         if(outil.estBonOutil(ressource.type)) {
-            ressource.quantite--;
+            int forceDeTravail = expert ? outil.getNiveau()*2 : outil.getNiveau();
+            if(forceDeTravail > ressource.quantite)
+                forceDeTravail = ressource.quantite;
+            ressource.quantite -= forceDeTravail;
             System.out.println("j'ai récolté "+ ressource.type.getRecolte() +", il en reste " + ressource.quantite);
-            if (ressource.quantite == 0) {
-                System.out.println("Il n'y a plus de ressource sur cette case");
-                ressource = null;
-            }
-            Inventaire.getInstance().ajouterRessource(ressource.type, 1);
+            Inventaire.getInstance().ajouterRessource(ressource.type, forceDeTravail);
+            outil.ameliorer();
+            this.checkRessource();
+
         }
         else {
             System.out.println("Mauvais outil");
-            return;
         }
+        return true;
     }
 
     public void afficher(){
         System.out.println("Case ("+this.x+","+this.y+"): ");
         System.out.println(" - Ressource : "+ressource.type+" ("+ressource.quantite+")");
-        if (Unite != null)
-            this.Unite.afficher();
+        if (unite != null)
+            this.unite.afficher();
+    }
+
+    public boolean aUneUnite() {
+        return this.unite != null;
+    }
+
+    public void checkRessource(){
+        if (ressource.quantite <= 0) {
+            ressource = new Ressource(RIEN);
+        }
     }
 
     public int getX() {
         return this.x;
     }
+
     public int getY() {
         return this.y;
     }
+
     public Ressource getRessource() {
         return this.ressource;
     }
+
     public UniteAbstract getUnite() {
-        return this.Unite;
+        return this.unite;
     }
+
     public void setUnite(UniteAbstract unite){
-        this.Unite = unite;
+        this.unite = unite;
     }
+
     public TypeRessource getTypeRessource() {
         return this.ressource.type;
     }
+
 }
 
 

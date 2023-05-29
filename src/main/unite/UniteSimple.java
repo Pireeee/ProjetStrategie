@@ -3,105 +3,75 @@ package main.unite;
 import main.*;
 
 public class UniteSimple extends UniteAbstract{
-    public boolean expert;
-    public boolean monte;
-    public Outil outil;
-    public int exp;
+    private boolean expert;
+    private int exp;
+    private int fatigue;
 
     public UniteSimple(String nom, TypeTravail typeTravail, Case position) {
         this.nom = nom;
-        this.outil = new Outil(typeTravail);
+        this.setOutil(new Outil(typeTravail));
         this.expert = false;
-        this.monte = false;
         this.exp = 0;
         this.setPosition(position);
         this.setVitesse(1);
-        this.cout = 1;
+        this.setCout(1);
     }
 
     @Override
     public void travailler() {
-        try {
-            consomerNourriture(cout);
-        }
-        catch (Exception e){
+        Inventaire inventaire = Inventaire.getInstance();
+        //mange de la nourriture suivant l'apetit de l'unitée
+        int faim = this.isExpert() ? this.getCout()*2 : this.getCout();
+        if (!inventaire.possedeRessource(TypeRessource.NOURRITURE,faim)){
             System.out.println(nom + " n'a pas assez de nourriture pour travailler");
+            checkExpert();
             return;
         }
         System.out.print(nom + "(" + this.getPosition().getX() + "," + this.getPosition().getY() + ") :");
-        this.getPosition().consomerRessource(outil);
-        if (exp<5)
-            exp++;
+        //l'unité essaye de consomer la ressource sur laquelle elle est.
+        if(this.getPosition().consomerRessource(this.getOutil(),this.isExpert())){
+            levelUp();
+        }
         else {
-            expert = true;
-            this.getPosition().consomerRessource(outil);
+            checkExpert();
         }
 
-    }
-    @Override
-    public void deplacer(){
-        this.cheminLePlusCourt(this.ressouceLaPlusProche(this.outil.getTypeRessource()));
     }
 
     @Override
     public void afficher() {
-        System.out.println("    Unite "+ nom + ":");
-        outil.afficher();
-        System.out.println("     - Expert : " + expert);
-        System.out.println("     - Monté : " + monte);
-        System.out.println("     - Expérience : " + exp);
+        System.out.println(" - Unite "+ nom + ":");
+        getOutil().afficher();
+        if(this.isExpert())
+            System.out.println("    - Unité Experte ");
+        System.out.println("     - Expérience : " + this.exp);
         System.out.println("     - Vitesse : " + this.getVitesse());
     }
 
-    public void deplacer(Direction direction) {
-        int x = this.getX();
-        int y = this.getY();
-        switch (direction) {
-            case HAUT -> y--;
-            case BAS -> y++;
-            case GAUCHE -> x--;
-            case DROITE -> x++;
-        }
-        this.teleporter(x, y);
+    public boolean isExpert() {
+        return this.expert;
     }
 
-    public Case ressouceLaPlusProche(TypeRessource[] typeRessources){
-        Case caseRessource = null;
-        int distanceMin = 1000000;
-        for(int i = 0; i < Carte.getInstance().getX(); i++){
-            for(int j = 0; j < Carte.getInstance().getY(); j++){
-                for (TypeRessource typeRessource : typeRessources) {
-                    if (Carte.getInstance().get(i, j).getRessource() != null && Carte.getInstance().get(i, j).getTypeRessource() == typeRessource) {
-                        int distance = Math.abs(this.getX() - i) + Math.abs(this.getY() - j);
-                        if (distance < distanceMin) {
-                            distanceMin = distance;
-                            caseRessource = Carte.getInstance().get(i, j);
-                        }
-                    }
-                }
+    public void levelUp(){
+        if (this.expert)
+            return;
+        this.exp++;
+        if (this.exp == 5){
+            this.expert = true;
+            this.setVitesse(this.getVitesse()+1);
+        }
+    }
+
+    public void checkExpert(){
+        if (isExpert()){
+            fatigue++;
+            if (fatigue == 3){
+                System.out.println(nom + " devient une unité simple");
+                this.expert = false;
+                this.exp = 0;
+                this.setVitesse(1);
+                this.setCout(1);
             }
-        }
-        return caseRessource;
-    }
-
-    public void cheminLePlusCourt(Case destination){
-        int x = this.getX();
-        int y = this.getY();
-        int xDestination = destination.getX();
-        int yDestination = destination.getY();
-        int xDistance = xDestination - x;
-        int yDistance = yDestination - y;
-        if (xDistance > 0){
-            this.deplacer(Direction.DROITE);
-        }
-        else if (xDistance < 0){
-            this.deplacer(Direction.GAUCHE);
-        }
-        else if (yDistance > 0){
-            this.deplacer(Direction.BAS);
-        }
-        else if (yDistance < 0){
-            this.deplacer(Direction.HAUT);
         }
     }
 }

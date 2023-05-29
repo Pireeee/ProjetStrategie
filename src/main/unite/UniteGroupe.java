@@ -1,17 +1,26 @@
 package main.unite;
 
+import main.Case;
 import main.Direction;
-import main.TypeRessource;
+import main.Outil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UniteGroupe extends UniteAbstract{
-    public List<UniteSimple> unites;
+    private final List<UniteSimple> unites;
 
-    public UniteGroupe(List<UniteSimple> unites) {
-        this.unites = unites;
+    public UniteGroupe(UniteAbstract unite) {
+        this.unites = new ArrayList<>();
+        if(unite.getClass().isInstance(UniteGroupe.class)){
+            UniteGroupe uniteGroupe = (UniteGroupe) unite;
+            unites.addAll(uniteGroupe.unites);
+        }
+        else{
+            //TODO demande un nom de groupe au joueur
+            unites.add((UniteSimple) unite);
+        }
     }
-
     @Override
     public void travailler() {
         for(UniteSimple unite : unites)
@@ -29,9 +38,9 @@ public class UniteGroupe extends UniteAbstract{
         return vitesse;
     }
     @Override
-    public void deplacer(){
+    public void deplacerDeUnVersDirection(Direction direction){
         for(UniteSimple unite : unites)
-            unite.deplacer();
+            unite.deplacerDeUnVersDirection(direction);
     }
 
     @Override
@@ -40,4 +49,32 @@ public class UniteGroupe extends UniteAbstract{
         for(UniteSimple unite : unites)
             unite.afficher();
     }
+
+    @Override
+    public Outil getOutil() {
+        return unites.get(0).getOutil();
+    }
+
+    public void addUnite(UniteAbstract unite){
+        if(unite.getClass().isInstance(UniteGroupe.class)){
+            UniteGroupe uniteGroupe = (UniteGroupe) unite;
+            unites.addAll(uniteGroupe.unites);
+        }
+        else{
+            unites.add((UniteSimple) unite);
+        }
+    }
+    @Override
+    public Case getPosition() {
+        return unites.get(0).getPosition();
+    }
+    @Override
+    public int getX() {
+        return unites.get(0).getX();
+    }
+    @Override
+    public int getY() {
+        return unites.get(0).getY();
+    }
+
 }
