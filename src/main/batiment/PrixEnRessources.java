@@ -1,4 +1,4 @@
-package main.Batiment;
+package main.batiment;
 
 
 import main.TypeRessource;
