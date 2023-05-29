@@ -5,7 +5,7 @@ public enum TypeRessource {
     OR(8,"O","de l'or"),
     PIERRE(5, "P","de la pierre"),
     NOURRITURE(30,"N","de la nourriture"),
-    RIEN(0," ",""),
+    RIEN(0,"",""),
     ;
 
     private final int tailleMax;

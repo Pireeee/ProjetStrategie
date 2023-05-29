@@ -61,16 +61,17 @@ class Case {
 }
 
 enum TypeResource {
-  +{field} BOIS (50,"B","du bois")
-  +{field} OR (50,"O","de l'or")
-  +{field} PIERRE (50,"P","de la pierre")
-  +{field} NOURRITURE (50,"N","de la nourriture")
+  +{field} BOIS(7,"B","du bois")
+  +{field} OR(8,"O","de l'or")
+  +{field} PIERRE(5, "P","de la pierre"),
+  +{field} NOURRITURE(30,"N","de la nourriture"),
+  +{field} RIEN(0,"",""),
 
   -int tailleMax
   -String symbole
   -String recolte
 
-  +TypeRessource(float chance, int tailleMax)
+  +TypeRessource( int tailleMax, String symbole, String recolte)
   +int getTailleMax()
   +String getSymbole()
   +String getRecolte()
@@ -86,49 +87,63 @@ enum TypeTravail {
   +boolean estBonOutil(TypeRessource)
   +TypeRessource[] getTypeRessource()
 }
-abstract class UniteAbstract{
+abstract class unite.UniteAbstract{
   -String nom
   -int vitesse
   -int cout
   -Case position
+  -Outil outil;
 
-
-  +{abstract} void deplacer()
   +{abstract} void afficher()
   +{abstract} void travailler()
-  +void seDeplacer(position)
-  +void ConsomerNourriture(cout)
+  +Outil getOutil()
+  +void setOutil(outil)
+  +void deplacer()
+  +void deplacerDeUnVersDirection(Direction direction)
+  +Case ressouceLaPlusProche(TypeRessource[] typeRessources)
+  +Direction cheminLePlusCourt(Case destination)
+  +void teleporter(x,y)
   +Case getPosition()
   +void setPosition(position)
   +int getX()
   +int getY()
   +int getVitesse()
   +void setVitesse(vitesse)
-  +void teleporter(x,y)
+  +int getCout()
+  +void setCout(int cout)
+
 }
 
-class UniteGroupe extends UniteAbstract {
+class unite.UniteGroupe extends unite.UniteAbstract {
   -List<UniteAbstract> unites
 
-  +void ConsomerNourriture(cout)
+  +UniteGroupe(UniteAbstract unite)
   +void travailler()
-  +void teleporter(x,y)
-  +void deplacer()
+  +int getVitesse()
+  +deplacerDeUnVersDirection(Direction direction)
+  +void afficher()
+  +Outil getOutil()
+  +addUnite(UniteAbstract unite)
+  +Case getPosition()
+  +int getX()
+  +int getY()
 }
 
-class UniteSimple extends UniteAbstract {
+class unite.UniteSimple extends unite.UniteAbstract {
    boolean expert
-   Outil outil;
    int exp;
 
    +UniteSimple(nom, vitesse, cout, position)
-   +void ConsomerNourriture(cout)
    +void travailler()
    +void deplacer()
+   +void afficher()
+   +boolean isExpert()
+   +void levelUp()
+   +void checkExpert()
 
 }
 
-class UniteMonte extends UniteAbstract {
+class unite.UniteMonte extends unite.UniteAbstract {
   -UniteSimple unite
 
   +void seDeplacer()
@@ -138,16 +153,25 @@ class Outil{
   -int niveau
   -TypeTravail type
 
-  Outil(type)
+  +Outil(typeTravail)
   +boolean estBonOutil(TypeRessource)
+  +TypeRessource[] getTypeRessource()
+  +void afficher()
+  +void ameliorer()
+  +int getNiveau()
+  +TypeTravail getTypeTravail()
 }
 class Ressource{
   -TypeRessource type
   -int quantite
 
   Ressource(type)
-  +int getQuantite()
-  +TypeRessource getType()
+}
+enum Direction {
+  +{field} HAUT
+  +{field} BAS
+  +{field} GAUCHE
+  +{field} DROITE
 }
 
 @enduml
